@@ -6,3 +6,20 @@
 import math
 import pygame
 import time
+
+pygame.font.init()
+
+WIDTH, HEIGHT = 960, 540
+WIN = pygame.display.set_mode((WIDTH, HEIGHT))
+
+pygame.display.set_caption("Space Dodge")
+#player size
+PLAYER_WIDTH = 10
+PLAYER_HEIGHT = 15
+#Tiles to build the wall around
+Tile_size = 20
+
+FONT = pygame.font.SysFont("comicsans", 30)
+
+while True:
+    pass
