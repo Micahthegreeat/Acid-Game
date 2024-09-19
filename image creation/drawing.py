@@ -1,5 +1,6 @@
 import tkinter as tk
 from PIL import ImageGrab
+from PIL import Image
 import turtle
 import time
 
@@ -9,14 +10,18 @@ def dump_gui():
     takes a png screenshot of a tkinter window, and saves it on in cwd
     """
     print('...dumping gui window to png')
-    root.update()
     
+    
+    #my screen in defaultly scaled up to 150 percent in windows
 
-    x0 = root.winfo_rootx() * 2
-    y0 = root.winfo_rooty() * 2
-    x1 = x0 + (root.winfo_width() * 2) 
-    y1 = y0 + (root.winfo_height() *2)
+    x0 = root.winfo_rootx() * 1.5 + 6
+    y0 = root.winfo_rooty() * 1.5 + 8
+    x1 = x0 + root.winfo_width() * 1.5 - 10
+    y1 = y0 + root.winfo_height() * 1.5 - 12
     ImageGrab.grab().crop((x0, y0, x1, y1)).save("gui_image_grabbed.png")
+    image = Image.open('gui_image_grabbed.png')
+    new_image = image.resize((16, 16))
+    new_image.save('gui_image_grabbed.png')
 
 
 def draw_sierpinski(length, depth):
@@ -38,20 +43,34 @@ def draw_sierpinski(length, depth):
         t.right(60)
 
 
+def pixelDraw(x, y, color):
+    x = x -8
+    y = y-8
+    x = x * 40
+    y = y * 40
+    canvas.create_rectangle( (x, y),(x+39, y + 39), outline=color, fill =color)
+
 root = tk.Tk()
-canvas = tk.Canvas(root, width=500, height=500)
+canvas = tk.Canvas(root, width=640, height=640)
 canvas.pack()
 
 t = turtle.RawTurtle(canvas)
 
-t.penup()
-t.goto(-200, -175)
-t.pendown()
-draw_sierpinski(400, 1)
+for i in range(0,16):
+    for c in range(0,16):\
+        pixelDraw(i,c,"#000000")
+for i in range(4, 13):
+    pixelDraw(i,0, 'green')
+for i in range(3, 14):
+    pixelDraw(i,1, 'green')
+pixelDraw(3,2, 'green')
+pixelDraw(13,2, 'green')
+
 
 
 
 t.hideturtle()
+#input()
 
 dump_gui()
 print('checking up')
