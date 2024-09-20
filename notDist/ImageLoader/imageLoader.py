@@ -16,7 +16,7 @@ class SpriteSheet():
 
 
 def image(scale_size, file):
-	screen = pygame.display.set_mode((16 * 16 * scale_size, 16 * 9 * scale_size))
+	screen = pygame.display.set_mode((16 * 16 * scale_size * 2, 16 * 9 * scale_size * 2))
 	pygame.display.set_caption('Spritesheets')
 
 	list = []
@@ -45,7 +45,7 @@ def image(scale_size, file):
 
 		#calculate each placement
 		square = 0
-		while square < 145:
+		while square <= 576:
 			
 			if list[square] == '0':
 				temp = frame_0
@@ -60,8 +60,8 @@ def image(scale_size, file):
 			elif list[square] == '5':
 				temp = frame_5
 
-			x = square % 16
-			y = square // 16
+			x = square % 32
+			y = square // 32
 			screen.blit(temp, (x* 16 * scale_size, y* 16 * scale_size))
 			
 
@@ -86,10 +86,10 @@ def image(scale_size, file):
 	pygame.quit()
 
 if __name__ == '__main__':
-	scale_size = 4
+	scale_size = 2
 	file = input('Name of .txt file: ')
 	background = image(scale_size, file)
 	#make screen
-	screen = pygame.display.set_mode((16 * 16 * scale_size, 16 * 9 * scale_size))
+	screen = pygame.display.set_mode((16 * 16 * scale_size * 2, 16 * 9 * scale_size * 2))
 	#update background
 	screen.fill(background)
