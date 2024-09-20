@@ -21,5 +21,4 @@ Tile_size = 20
 
 FONT = pygame.font.SysFont("comicsans", 30)
 
-while True:
-    pass
+input()
